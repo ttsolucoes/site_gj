@@ -1,0 +1,79 @@
+:root {
+    /* Cores principais solicitadas */
+    --text-color: #1A0D42;        /* Cor de texto principal */
+    --background-color: #FFFFFF; /* Fundo da página */
+    --border-color: #000000;     /* Linhas e bordas */
+
+    /* Cores auxiliares (manter ou adaptar conforme necessidade do cliente) */
+    --primary-color: #1A0D42;
+    --secondary-color: #34D399;
+    --accent-color: #F59E0B;
+    --danger-color: #EF4444;
+    --success-color: #10B981;
+    --info-color: #60A5FA;
+    --warning-color: #FBBF24;
+
+    /* Cores de texto secundárias */
+    --text-dark: #000000;
+    --text-light: #5E5E5E;
+
+    /* Cores de fundo e cartões */
+    --background-soft: #F7F7F7;
+    --background-card: #FFFFFF;
+
+    /* Botões */
+    --btn-primary-bg: var(--primary-color);
+    --btn-primary-text: #ffffff;
+    --btn-secondary-bg: var(--secondary-color);
+    --btn-secondary-text: #ffffff;
+
+    /* Modal */
+    --modal-bg: rgba(0, 0, 0, 0.6);
+    --modal-content-bg: #fff;
+
+    /* Espaçamento */
+    --spacing-unit: 1rem;
+}
+
+/* Reset básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+a {
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+body {
+    font-family: 'Fredoka', sans-serif; /* Exemplo: Fredoka como mais fácil */
+    font-weight: bold;
+    line-height: 1.6;
+    color: var(--text-color);
+    background-color: var(--background-color);
+}
+
+label {
+    font-weight: bold;
+    color: var(--text-dark);
+}
+
+.main-content {
+    min-height: 80vh;
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    background-color: var(--background-card);
+    border: 1px solid var(--border-color);
+    border-radius: 1rem;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+/* Utilitários */
+.text-center { text-align: center; }
+.mt-1 { margin-top: 0.5rem; }
+.mt-2 { margin-top: 1rem; }
+.mb-2 { margin-bottom: 1rem; }
