@@ -1,6 +1,5 @@
 from app import app
 from datetime import datetime
-import locale
 
 def datetimeformat(value, format="%d/%m/%Y"):
     if isinstance(value, str):
@@ -11,10 +10,6 @@ def datetimeformat(value, format="%d/%m/%Y"):
     return value.strftime(format)
 
 
-try:
-    locale.setlocale(locale.LC_TIME, 'pt_BR.utf8')  # Linux/Mac
-except:
-    locale.setlocale(locale.LC_TIME, 'Portuguese_Brazil.1252')  # Windows
 
 if __name__ == '__main__':
 

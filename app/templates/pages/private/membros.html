@@ -24,7 +24,7 @@
                 {% if user.data_nascimento %}
                 <div class="bg-zinc-800 text-white p-4 rounded-xl shadow-md">
                     <h3 class="text-lg font-semibold">{{ user.nome_completo }}</h3>
-                    <p>📅 {{ user.data_nascimento|datetimeformat("%d de %B") }}</p>
+                    <p>📅 {{ user.data_nascimento|datetimeformat("%d/%m") }}</p>
                     <p>📞 {{ user.telefone }}</p>
                     <p>📧 {{ user.email }}</p>
                 </div>
