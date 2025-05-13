@@ -15,15 +15,15 @@
         {{ form.hidden_tag() }}
         
         {{ render_field(form.username, placeholder="Escolha um nome de usuário") }}
-        {{ render_field(form.email, placeholder="Seu melhor email") }}
-        {{ render_field(form.password, placeholder="Crie uma senha segura") }}
-        {{ render_field(form.confirm, placeholder="Repita a senha") }}
         {{ render_field(form.nome_completo, placeholder="Nome completo") }}
+        {{ render_field(form.data_nascimento, type="date", placeholder="Data de nascimento") }}
         {{ render_field(form.telefone, placeholder="Telefone (com DDD)") }}
         {{ render_field(form.instagram, placeholder="@instagram (opcional)") }}
+        {{ render_field(form.email, placeholder="Seu melhor email") }}
         {{ render_field(form.contato_emergencia, placeholder="Nome e telefone de emergência") }}
-        {{ render_field(form.data_nascimento, type="date", placeholder="Data de nascimento") }}
         {{ render_field(form.endereco, placeholder="Endereço (opcional)") }}
+        {{ render_field(form.password, placeholder="Crie uma senha segura") }}
+        {{ render_field(form.confirm, placeholder="Repita a senha") }}
 
         
         <div class="form-footer">
