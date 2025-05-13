@@ -209,3 +209,33 @@ def logs_usuario(username):
     
     except Exception as e:
         return jsonify({"success": False, "message": f"Erro ao buscar logs: {str(e)}"}), 500
+
+@app.route('/membros')
+@required_roles('admin', 'user')
+def membros():
+    usuarios = ver_usuarios()
+    return render_template('pages/private/membros.html', usuario=usuarios)
+
+@app.route('/membros/calendario')
+@required_roles('admin', 'user')
+def membros_calendario():
+    usuarios = ver_usuarios()
+    return render_template('pages/private/membros_calendario.html', usuarios=usuarios)
+
+@app.route('/membros/info')
+@required_roles('admin', 'user')
+def membros_info():
+    usuarios = ver_usuarios()
+    return render_template('pages/private/membros_info.html', usuarios=usuarios)
+
+@app.route('/membros/att_info')
+@required_roles('admin', 'user')
+def membros_conta():
+    username = session['user']['username']
+    usuarios = ver_usuarios()
+    usuario = next((u for u in usuarios if u['username'] == username), None)
+
+    if session['user']['cargo'] == 'admin':
+        return render_template('pages/private/membros_conta_admin.html', usuarios=usuarios)
+
+    return render_template('pages/private/membros_conta_user.html', usuario=usuario)

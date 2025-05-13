@@ -13,6 +13,8 @@ def perfil():
     
     username = session['user']['username']
     user_data = detalhar_usuario(username)
+    print(user_data)
     user_logs = log_usuario(username)
+    print(user_logs)
     
     return render_template('pages/private/perfil.html', user=user_data, logs=user_logs)

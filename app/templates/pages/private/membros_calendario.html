@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title %} MEMBROS {% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/pages/membros.css') }}">
+{% endblock %}
+
+{% block content %}
+
+<h2 class="text-xl mb-4">Aniversariantes</h2>
+<div class="bg-zinc-800 text-white p-4 rounded-xl shadow-md aniversariante-card">
+  {% for user in usuarios %}
+    {% if user.data_nascimento %}
+      <div class="bg-zinc-800 text-white p-4 rounded-xl shadow-md">
+        <h3 class="text-lg font-semibold">{{ user.nome_completo }}</h3>
+        <p>📅 {{ user.data_nascimento|datetimeformat("%d de %B") }}</p>
+        <p>📞 {{ user.telefone }}</p>
+        <p>📧 {{ user.email }}</p>
+      </div>
+    {% endif %}
+  {% endfor %}
+</div>
+
+{% endblock %}

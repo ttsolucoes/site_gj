@@ -46,19 +46,37 @@ FROM novos_usuarios
     } for row in resultados]
 
 def ver_usuarios() -> List[Dict[str, Union[int, str, bool]]]:
-    """Retorna todos os usuários com suas informações."""
+    """Retorna todos os usuários com suas informações detalhadas."""
     query = """
-SELECT 
-    u.id, 
-    u.username, 
-    u.senha_hash,
-    u.email,
-    u.cargo,
-    u.acesso_api,
-    COUNT(l.id) as total_logs
-FROM usuarios u
-LEFT JOIN logs_usuarios l ON u.id = l.usuario_id
-GROUP BY u.id
+    SELECT 
+        u.id, 
+        u.username, 
+        u.senha_hash,
+        u.email,
+        u.cargo,
+        u.acesso_api,
+        u.nome_completo,
+        u.telefone,
+        u.instagram,
+        u.contato_emergencia,
+        u.data_nascimento,
+        u.endereco,
+        COUNT(l.id) as total_logs
+    FROM usuarios u
+    LEFT JOIN logs_usuarios l ON u.id = l.usuario_id
+    GROUP BY 
+        u.id, 
+        u.username, 
+        u.senha_hash, 
+        u.email, 
+        u.cargo, 
+        u.acesso_api, 
+        u.nome_completo, 
+        u.telefone, 
+        u.instagram, 
+        u.contato_emergencia, 
+        u.data_nascimento, 
+        u.endereco
     """
     resultados = executar_sql(query)
     
@@ -69,8 +87,15 @@ GROUP BY u.id
         'email': row[3],
         'cargo': row[4],
         'acesso_api': bool(row[5]),
-        'total_logs': row[6]
+        'nome_completo': row[6],
+        'telefone': row[7],
+        'instagram': row[8],
+        'contato_emergencia': row[9],
+        'data_nascimento': row[10],
+        'endereco': row[11],
+        'total_logs': row[12]
     } for row in resultados]
+
 
 def criar_usuario_public(username: str, senha: str, email : str) -> bool:
 
@@ -140,12 +165,31 @@ SELECT * FROM recuperar_acesso WHERE usuario_id = {id_solicitacao};
     }
     return resultado
 
-def criar_usuario(username: str, email, senha: str, cargo: str = 'user', acesso_api: bool = False) -> bool:
-
+def criar_usuario(
+    username: str,
+    email: str,
+    senha: str,
+    cargo: str = 'user',
+    acesso_api: bool = False,
+    nome_completo: str = None,
+    telefone: str = None,
+    instagram: str = None,
+    contato_emergencia: str = None,
+    data_nascimento: str = None,
+    endereco: str = None
+) -> bool:
+    
     senha_hash = _hash_senha(senha)
     query = f"""
-INSERT INTO usuarios (username, email, senha_hash, cargo, acesso_api)
-VALUES ('{username}', '{email}', '{senha_hash}', '{cargo}', {int(acesso_api)})
+    INSERT INTO usuarios (
+        username, email, senha_hash, cargo, acesso_api,
+        nome_completo, telefone, instagram, 
+        contato_emergencia, data_nascimento, endereco
+    ) VALUES (
+        '{username}', '{email}', '{senha_hash}', '{cargo}', {int(acesso_api)},
+        '{nome_completo}', '{telefone}', '{instagram}',
+        '{contato_emergencia}', '{data_nascimento}', '{endereco}'
+    )
     """
     try:
         executar_sql(query)
@@ -237,14 +281,20 @@ VALUES ({user_id}, '{acao}', {f"'{detalhes}'" if detalhes else 'NULL'})
         return False
 
 def detalhar_usuario(username: str) -> Optional[Dict[str, Union[int, str, bool]]]:
-    """Retorna os detalhes de um usuário específico."""
+    """Retorna os detalhes de um usuário específico com todos os campos."""
     query = f"""
 SELECT 
     u.id, 
     u.username, 
     u.email, 
     u.cargo, 
-    u.acesso_api
+    u.acesso_api,
+    u.nome_completo,
+    u.telefone,
+    u.instagram,
+    u.contato_emergencia,
+    u.data_nascimento,
+    u.endereco
 FROM usuarios u
 WHERE u.username = '{username}'
     """
@@ -259,9 +309,16 @@ WHERE u.username = '{username}'
             'username': row[1],
             'email': row[2],
             'cargo': row[3],
-            'acesso_api': bool(row[4])
+            'acesso_api': bool(row[4]),
+            'nome_completo': row[5],
+            'telefone': row[6],
+            'instagram': row[7],
+            'contato_emergencia': row[8],
+            'data_nascimento': row[9],
+            'endereco': row[10]
         }
-    except Exception:
+    except Exception as e:
+        print(f"Erro ao detalhar usuário: {str(e)}")
         return None
 
 def promover_usuario(username: str, tipo: str, novo_cargo: str = None, nova_senha: str = None) -> bool:
