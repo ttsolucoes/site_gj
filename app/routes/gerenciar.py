@@ -17,6 +17,9 @@ from utils import (
     atualizar_email_usuario
 )
 from typing import Dict, List, Union
+from collections import defaultdict
+from datetime import datetime
+import calendar
 
 app.secret_key = secret_key
 
@@ -45,6 +48,27 @@ def get_solicitacoes() -> List[Dict[str, Union[int, str, bool]]]:
     } for user in recuperar_acesso_public]
 
     return usuarios_public_formatado + recuperar_acesso_formatado
+
+def ver_aniversariantes_agrupados():
+    usuarios = ver_usuarios()
+    meses = {i: calendar.month_name[i] for i in range(1, 13)}
+    
+    aniversariantes = defaultdict(lambda: defaultdict(list))
+    
+    for user in usuarios:
+        data = user.get('data_nascimento')
+        if data:
+            # Converte a string da data para objeto datetime
+            try:
+                dt = datetime.strptime(data, '%Y-%m-%d')
+                mes_nome = meses[dt.month]
+                dia = dt.day
+                aniversariantes[mes_nome][dia].append(user)
+            except ValueError:
+                continue  # ignora datas inválidas
+
+    return aniversariantes
+
 
 @app.route('/usuarios')
 @required_roles('admin')
@@ -214,13 +238,15 @@ def logs_usuario(username):
 @required_roles('admin', 'user')
 def membros():
     usuarios = ver_usuarios()
-    return render_template('pages/private/membros.html', usuario=usuarios)
+    aniversariantes = ver_aniversariantes_agrupados()
+    return render_template('pages/private/membros.html', usuario=usuarios, aniversariantes=aniversariantes)
 
 @app.route('/membros/calendario')
 @required_roles('admin', 'user')
 def membros_calendario():
     usuarios = ver_usuarios()
-    return render_template('pages/private/membros_calendario.html', usuarios=usuarios)
+    aniversariantes = ver_aniversariantes_agrupados()
+    return render_template('pages/private/membros_calendario.html', usuarios=usuarios, aniversariantes=aniversariantes)
 
 @app.route('/membros/info')
 @required_roles('admin', 'user')

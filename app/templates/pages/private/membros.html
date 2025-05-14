@@ -18,35 +18,41 @@
 
     <div class="tab-content">
         <div class="tab-pane active" id="aniversariantes">
-            <h2 class="text-xl mb-4">Aniversariantes</h2>
-            <div class="bg-zinc-800 text-white p-4 rounded-xl shadow-md aniversariante-card">
-            {% for user in usuario %}
-                {% if user.data_nascimento %}
-                <div class="bg-zinc-800 text-white p-4 rounded-xl shadow-md">
-                    <h3 class="text-lg font-semibold">{{ user.nome_completo }}</h3>
-                    <p>📅 {{ user.data_nascimento|datetimeformat("%d/%m") }}</p>
-                    <p>📞 {{ user.telefone }}</p>
-                    <p>📧 {{ user.email }}</p>
-                </div>
-                {% endif %}
+          <h2 class="text-xl mb-4">Aniversariantes</h2>
+          <div class="calendar">
+            {% for mes, dias in aniversariantes.items() %}
+              <h2>{{ mes }}</h2>
+              <div class="mes-bloco">
+                {% for dia, lista in dias.items() %}
+                  <div class="dia-bloco">
+                    <strong>{{ dia }}</strong>
+                    {% for user in lista %}
+                      <div class="aniversariante-card">
+                        <p>{{ user.nome_completo }}</p>
+                        <p>{{ user.data_nascimento }}</p>
+                      </div>
+                    {% endfor %}
+                  </div>
+                {% endfor %}
+              </div>
             {% endfor %}
-            </div>
+          </div>
         </div>
         <div class="tab-pane" id="info">
             <h2 class="text-xl mb-4">Informações dos Membros</h2>
-            <div class="bg-white dark:bg-zinc-800 p-4 rounded-xl shadow-sm membro-card">
-            {% for user in usuario %}
-                {% if user.nome_completo %}
-                    <div class="bg-white dark:bg-zinc-800 p-4 rounded-xl shadow-sm">
-                    <h3 class="font-bold text-lg">{{ user.nome_completo }}</h3>
-                    <p>📍 Endereço: {{ user.endereco }}</p>
-                    <p>📞 Telefone principal: {{ user.telefone }}</p>
-                    <p>🚨 Contato de Emergência: {{ user.contato_emergencia }}</p>
-                    <p>📧 Correio Eletrônico: {{ user.email }}</p>
-                    <p>📷 Instagram: {{ user.instagram }}</p>
-                    </div>
-                {% endif %}
-            {% endfor %}
+            <div class="membro-grid">
+                {% for user in usuario %}
+                    {% if user.nome_completo %}
+                        <div class="membro-card">
+                            <h3>{{ user.nome_completo }}</h3>
+                            <p>📍 <strong>Endereço:</strong> {{ user.endereco }}</p>
+                            <p>📞 <strong>Telefone:</strong> {{ user.telefone }}</p>
+                            <p>🚨 <strong>Emergência:</strong> {{ user.contato_emergencia }}</p>
+                            <p>📧 <strong>Email:</strong> {{ user.email }}</p>
+                            <p>📷 <strong>Instagram:</strong> {{ user.instagram }}</p>
+                        </div>
+                    {% endif %}
+                {% endfor %}
             </div>
         </div>
         <div class="tab-pane" id="att_info">

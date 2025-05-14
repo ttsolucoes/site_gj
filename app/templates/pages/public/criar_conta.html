@@ -22,8 +22,8 @@
         {{ render_field(form.email, placeholder="Seu melhor email") }}
         {{ render_field(form.contato_emergencia, placeholder="Nome e telefone de emergência") }}
         {{ render_field(form.endereco, placeholder="Endereço (opcional)") }}
-        {{ render_field(form.password, placeholder="Crie uma senha segura") }}
-        {{ render_field(form.confirm, placeholder="Repita a senha") }}
+        {{ render_field(form.password, placeholder="Crie uma senha segura", type="password") }}
+        {{ render_field(form.confirm, placeholder="Repita a senha", type="password") }}
 
         
         <div class="form-footer">
