@@ -31,7 +31,7 @@ class RecoveryForm(FlaskForm):
 @app.route('/register', methods=['GET', 'POST'])
 def register():
 
-    from utils import criar_usuario
+    from utils import criar_usuario, enviar_email
 
     form = RegistrationForm()
     if form.validate_on_submit():
@@ -52,6 +52,35 @@ def register():
             data_nascimento=form.data_nascimento.data.strftime('%Y-%m-%d'),
             endereco=form.endereco.data
         )
+        destino = form.email.data
+        assunto = 'Confirmação de Cadastro'
+        mensagem = f'''
+
+<p>Olá {form.nome_completo.data},</p>
+
+<p>Estamos entrando em contato para informar que sua conta está disponível na plataforma do GJ:</p>
+
+<p>- Website: https://gj-guadalupe.onrender.com</p>
+
+<p>- Usuário: {form.username.data}</p>
+
+<p>( a senha é a mesma criada no ato do cadastro  )</p>
+
+<p>- Instagram: https://www.instagram.com/gj.nsguadalupe/ </p>
+
+<p>Ou simplesmente responda esse e-mail.</p>
+
+<p>Estamos gratos pela sua atenção e solicitação. Esperamos que nossa jornada juntos seja positiva e adorável!</p>
+
+-----
+</br>
+<small>Atenciosamente, equipe <strong>TT SOLUÇÕES</strong></small>
+</br>
+<small>Transformação técnico-digital para empresas que ainda fazem milagre com planilha.</small>
+</br>
+<img src="https://lh3.googleusercontent.com/d/1W1llr4gNibdJwsGX11dj2jspIt633yWX" width="96" height="96" alt="Logo TT Soluções">
+        '''
+        enviar_email(destino, assunto, mensagem)
         return render_template('pages/public/conta_criada.html', novos=new_user)
     return render_template('pages/public/criar_conta.html', form=form)
 

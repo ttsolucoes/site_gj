@@ -238,8 +238,9 @@ def logs_usuario(username):
 @required_roles('admin', 'user')
 def membros():
     usuarios = ver_usuarios()
+    usuario_logado = next((u for u in usuarios if u['username'] == session['user']['username']), None)
     aniversariantes = ver_aniversariantes_agrupados()
-    return render_template('pages/private/membros.html', usuario=usuarios, aniversariantes=aniversariantes)
+    return render_template('pages/private/membros.html', logado=usuario_logado, usuario=usuarios, aniversariantes=aniversariantes)
 
 @app.route('/membros/calendario')
 @required_roles('admin', 'user')
@@ -265,3 +266,56 @@ def membros_conta():
         return render_template('pages/private/membros_conta_admin.html', usuarios=usuarios)
 
     return render_template('pages/private/membros_conta_user.html', usuario=usuario)
+
+@app.route('/membros/att_info/<username>', methods=['POST'])
+@required_roles('admin', 'user')
+def atualizar_conta(username):
+    from utils import enviar_email
+    data = request.get_json() or {}
+    try:
+        inserir_log(session['user']['username'], 'atualizar_conta', f'Atualizou conta {username}')
+        destino = data.get('email')
+        assunto = 'Atualização de Cadastro'
+        mensagem = f'''
+
+<p>Olá {data.get('nome_completo')},</p>
+
+<p>Estamos entrando em contato para informar que sua conta na plataforma do GJ, teve uma alteração:</p>
+
+<p>- Website: https://gj-guadalupe.onrender.com</p>
+
+<p>- Nome: {data.get('nome_completo')}</p>
+
+<p>- Telefone: {data.get('telefone')}</p>
+
+<p>- Instagram: {data.get('instagram')}</p>
+
+<p>- Contato de Emergência: {data.get('emergencia')}</p>
+
+<p>- Endereço: {data.get('endereco')}</p>
+
+<p>- Data de Nascimento: {data.get('nascimento')}</p>
+
+<p> Caso não tenha solicitado essa atualização, entre em contato conosco imediatamente.</p>
+
+<p>Se você tiver alguma dúvida ou precisar de assistência, não hesite em entrar em contato conosco através dos seguintes canais:</p>
+
+<p>- Instagram: https://www.instagram.com/gj.nsguadalupe/ </p>
+
+<p>Ou simplesmente responda esse e-mail.</p>
+
+<p>Estamos gratos pela sua atenção e solicitação. Esperamos que nossa jornada juntos seja positiva e adorável!</p>
+
+-----
+</br>
+<small>Atenciosamente, equipe <strong>TT SOLUÇÕES</strong></small>
+</br>
+<small>Transformação técnico-digital para empresas que ainda fazem milagre com planilha.</small>
+</br>
+<img src="https://lh3.googleusercontent.com/d/1W1llr4gNibdJwsGX11dj2jspIt633yWX" width="96" height="96" alt="Logo TT Soluções">
+        '''
+        enviar_email(destino, assunto, mensagem)
+        return jsonify({"success": True, "message": "Conta atualizada com sucesso."})
+
+    except Exception as e:
+        return jsonify({"success": False, "message": f"Erro: {str(e)}"}), 500

@@ -57,18 +57,37 @@
         </div>
         <div class="tab-pane" id="att_info">
 
-            <h2 class="text-xl mb-4">Minha Conta</h2>
+            <h2 class="text-xl mb-4">Minha Conta | {{ session.user.username }}</h2>
             <form id="formAtualizaConta" class="space-y-4">
-            <div>
+              <div>
+                <input type="hidden" name="user" value="{{ session.user.username }}">
+                <label>Nome completo</label>
+                <input type="text" name="nome_completo" value="{{ logado.nome_completo }}" class="input" />
+                
                 <label>Email</label>
-                <input type="email" name="email" value="{{ usuario.email }}" class="input" />
-            </div>
-            <div>
+                <input type="email" name="email" value="{{ logado.email }}" class="input" />
+                
+                <label>Telefone</label>
+                <input type="text" name="telefone" value="{{ logado.telefone }}" class="input" />
+                
+                <label>Contato de emergência</label>
+                <input type="text" name="emergencia" value="{{ logado.contato_emergencia }}" class="input" />
+                
+                <label>Instagram</label>
+                <input type="text" name="instagram" value="{{ logado.instagram }}" class="input" />
+
+                <label>Endereço</label>
+                <input type="text" name="endereco" value="{{ logado.endereco }}" class="input" />
+                
+                <label>Data nascimento</label>
+                <input type="date" name="nascimento" value="{{ logado.data_nascimento }}" class="input" />
+                
                 <label>Nova Senha</label>
                 <input type="password" name="senha_nova" class="input" />
-            </div>
-            <button class="btn btn-primary">✅ Salvar Alterações</button>
+              </div>
+              <button type="submit" class="btn btn-primary">✅ Salvar Alterações</button>
             </form>
+
             <button onclick="removerConta()" class="btn btn-danger mt-4">🗑️ Excluir Minha Conta</button>
 
         </div>
@@ -82,6 +101,7 @@
 
 {% block js %}
 <script src="{{ url_for('static', filename='js/modules/membros.js') }}"></script>
+<script src="{{ url_for('static', filename='js/modules/atualizar_info.js') }}"></script>
 <script>
 function removerConta() {
   if (confirm("Tem certeza que deseja excluir sua conta?")) {

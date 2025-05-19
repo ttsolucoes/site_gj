@@ -3,6 +3,7 @@ from .modules import (
     detalhar_usuario, ver_usuarios_public, aprovar_usuario_publico, detalhar_recuperar_acesso, atualizar_senha_usuario, ver_recuperaracesso_public,
     acao_recuperar_acesso, atualizar_email_usuario
 )
+from .modules.correio_eletronico.functions import enviar_email
 
 __all__ = [
     'criar_usuario', 
@@ -22,5 +23,6 @@ __all__ = [
     'atualizar_senha_usuario', 
     'ver_recuperaracesso_public',
     'acao_recuperar_acesso',
-    'atualizar_email_usuario'
+    'atualizar_email_usuario',
+    'enviar_email'
 ]
