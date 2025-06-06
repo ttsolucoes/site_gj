@@ -34,6 +34,23 @@
     --radius: 12px;
     --transition-fast: 0.2s ease;
 
+  /* Cores temáticas para cada ato */
+  --ato-0-color: #1A0D42;    /* Entrada - Roxo escuro */
+  --ato-1-color: #2E7D32;    /* Criação - Verde */
+  --ato-2-color: #C62828;    /* Queda - Vermelho */
+  --ato-3-color: #F9A825;    /* Reconciliação - Amarelo */
+  --ato-4-color: #1565C0;    /* Maria - Azul */
+  --ato-5-color: #6A1B9A;    /* Espírito - Roxo */
+  --ato-6-color: #00838F;    /* Guadalupe - Azul esverdeado */
+  --ato-7-color: #EF6C00;    /* GJ - Laranja */
+  --ato-8-color: #AD1457;    /* Convite - Rosa escuro */
+  --ato-9-color: #37474F;    /* Graça - Cinza azulado */
+  --ato-10-color: #FFFFFF;   /* Céu - Branco */
+  
+  /* Transições */
+  --transition-medium: 0.5s ease;
+  --transition-slow: 1s ease;
+
     /* Espaçamento */
     --spacing-unit: 1rem;
 }
