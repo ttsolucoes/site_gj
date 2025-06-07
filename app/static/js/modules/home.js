@@ -62,7 +62,7 @@ document.addEventListener('DOMContentLoaded', function() {
         type: "video",
         src: "static/images/landing_page/ato-7/videos/videos_rapidos.mp4"
         },
-        audio: "static/images/landing_page/ato-6/audios/som_ambiente_igreja.mp3"
+        audio: "static/images/landing_page/ato-7/audios/musica_ambiente.mp3"
     },
     8: {
         title: "Venha ser de Deus",
@@ -71,7 +71,7 @@ document.addEventListener('DOMContentLoaded', function() {
         type: "video",
         src: "static/images/landing_page/ato-8/videos/botoes_animados.mp4"
         },
-        audio: "static/images/landing_page/ato-6/audios/som_ambiente_igreja.mp3"
+        audio: "static/images/landing_page/ato-8/audios/som_ambiente_igreja.mp3"
     },
     9: {
         title: "Tua graça me basta",
