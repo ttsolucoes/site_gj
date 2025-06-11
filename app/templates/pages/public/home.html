@@ -32,9 +32,7 @@
 <!-- Ato Sections -->
 {% for ato in range(1, 11) %}
 <section class="ato-section" id="ato-{{ ato }}" data-ato="{{ ato }}">
-  <div class="ato-background">
-    <!-- Background será preenchido via JS -->
-  </div>
+
   
   <div class="ato-content">
     <div class="ato-text">
@@ -48,7 +46,7 @@
       <!-- Mídias serão carregadas dinamicamente -->
     </div>
   </div>
-  
+
   <div class="ato-navigation">
     {% if ato > 1 %}
     <a href="#ato-{{ ato - 1 }}" class="nav-arrow nav-prev">‹</a>

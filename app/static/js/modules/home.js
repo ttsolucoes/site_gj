@@ -109,7 +109,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     if (config) {
       // Configurar background
-      const bgDiv = section.querySelector('.ato-background');
+      const bgDiv = section.querySelector('.ato-content');
       bgDiv.style.backgroundImage = `url('${config.bgImage}')`;
       
       // Configurar mídia

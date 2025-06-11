@@ -2,7 +2,7 @@
 .hero {
   position: relative;
   z-index: 10;
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 
 /* Evitar vazamento */
@@ -114,75 +114,69 @@ body {
   60% {transform: translateY(-5px);}
 }
 
-/* Ato Sections */
+/* ATO SECTION GERAL */
 .ato-section {
-  height: 100vh;
-  width: 100%;
   position: relative;
+  width: 100%;
+  height: 100vh;
   overflow: hidden;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  scroll-snap-align: start;
+  scroll-behavior: smooth;
 }
 
-.ato-background {
-  position: absolute;
-  top: 0;
-  left: 0;
+/* CONTAINER CENTRAL COM BACKGROUND VIA JS */
+.ato-content {
+  position: relative;
+  z-index: 1;
   width: 100%;
   height: 100%;
-  z-index: -1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5%;
+  gap: 3rem;
   background-size: cover;
   background-position: center;
-  transition: opacity var(--transition-slow);
+  background-repeat: no-repeat;
+  transition: background var(--transition-slow), opacity var(--transition-slow);
 }
 
-.ato-background::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5);
-}
-
-.ato-content {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 5%;
-  gap: 3rem;
-  height: 80%;
-}
-
+/* BLOCO DE TEXTO */
 .ato-text {
+  flex: 1;
   max-width: 600px;
-  background: rgba(0, 0, 0, 0.7);
+  background: rgba(0, 0, 0, 0.65);
+  color: white;
   padding: 2rem;
-  border-radius: 10px;
-  backdrop-filter: blur(5px);
-  animation: fadeIn 1s ease;
+  border-radius: 12px;
+  backdrop-filter: blur(6px);
+  animation: fadeIn 1s ease-in-out;
 }
 
 .ato-title {
   font-size: 2.5rem;
-  margin-bottom: 1.5rem;
-  color: white;
+  margin-bottom: 1rem;
+  color: #fff;
 }
 
 .ato-description {
-  font-size: 1.1rem;
+  font-size: 1.15rem;
   line-height: 1.8;
+  color: #eee;
 }
 
 .ato-description blockquote {
   font-style: italic;
   margin: 1rem 0;
   padding-left: 1rem;
-  border-left: 3px solid currentColor;
+  border-left: 4px solid var(--accent-color);
+  color: var(--accent-color);
 }
 
+/* BLOCO DE MÍDIA */
 .ato-media {
   flex: 1;
   max-width: 600px;
@@ -192,23 +186,26 @@ body {
   justify-content: center;
 }
 
-.ato-media img, .ato-media video {
-  max-height: 100%;
+.ato-media img,
+.ato-media video {
   max-width: 100%;
+  max-height: 100%;
   object-fit: contain;
-  border-radius: 5px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  border-radius: 8px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
 }
 
-/* Navegação */
+/* NAVEGAÇÃO ENTRE ATOS */
 .ato-navigation {
   position: absolute;
   bottom: 2rem;
-  width: 100%;
+  left: 50%;
+  transform: translateX(-50%);
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
   gap: 2rem;
+  z-index: 2;
 }
 
 .nav-arrow {
@@ -217,7 +214,6 @@ body {
   text-decoration: none;
   opacity: 0.7;
   transition: opacity var(--transition-medium);
-  cursor: pointer;
 }
 
 .nav-arrow:hover {
@@ -226,28 +222,24 @@ body {
 
 .ato-progress {
   display: flex;
-  gap: 0.8rem;
+  gap: 0.5rem;
 }
 
 .progress-dot {
   width: 12px;
   height: 12px;
   border-radius: 50%;
-  background-color: rgba(255, 255, 255, 0.3);
-  transition: all var(--transition-medium);
-  cursor: pointer;
+  background-color: white;
+  opacity: 0.3;
+  transition: opacity var(--transition-fast), transform var(--transition-fast);
 }
 
 .progress-dot.active {
-  background-color: white;
+  opacity: 1;
   transform: scale(1.3);
 }
 
-.progress-dot:hover {
-  transform: scale(1.3);
-}
-
-/* Animações */
+/* FADE-IN ANIMATION */
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(20px); }
   to { opacity: 1; transform: translateY(0); }

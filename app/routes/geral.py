@@ -50,9 +50,9 @@ def obter_descricao_ato(ato_numero):
         6: """<p><blockquote>“Não estou eu aqui, que sou tua Mãe?” (Nossa Senhora a Juan Diego)</blockquote></p>
 <p>Entre os séculos e continentes, a Mãe de Deus continua a visitar seus filhos. Em 1531, em Guadalupe, ela se manifesta como mulher do povo, com rosto indígena, vestida de céu.</p>
 <p>No Brasil, ela se faz presente nas comunidades simples, nas igrejas vivas, nas festas populares e no carinho materno do povo. Aqui em Vila Velha, a presença de Nossa Senhora de Guadalupe renova a fé, a pertença e a missão. Ela caminha conosco.</p>""",
-        7: """<p><blockquote>“Jovem, não tenham medo! Aceitem o convite da Igreja e de Cristo Senhor!” (Papa Leão XIV)</blockquote></p>
+        7: """<p><blockquote>“Jovens, não tenham medo! Aceitem o convite da Igreja e de Cristo Senhor!” (Papa Leão XIV)</blockquote></p>
 <p>Inspirados por Maria e movidos pelo Espírito, jovens se organizam, se unem e constroem comunidade. A família GJ nasce da necessidade de escutar da Palavra e servir a Deus com criatividade, alegria e coragem.</p>
-<p>Este ato mostra os frutos concretos da família GJ. Não somos espectadores da fé, mas protagonistas de um novo tempo.</p>""",
+<p>Não somos espectadores da fé, mas protagonistas de um novo tempo.</p>""",
         8: """<p><blockquote>“Vinde a mim todos vós que estais cansados e sobrecarregados.” (Mt 11,28)</blockquote></p>
 <p>A fé cristã não é imposição, mas convite. Um chamado suave, constante e insistente à conversão, à comunhão, à vida em plenitude. Aqui, os jovens de 18 a 29 anos são convidados a dar um passo a mais.</p>
 <p>Não é uma campanha, mas um apelo pessoal: tua graça me basta. Jesus estende a mão. A família GJ estende o coração. Você é esperado(a), como está.</p>""",
