@@ -2,10 +2,12 @@
 
 {% block css %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/pages/home.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/components/nav_atos.css') }}">
 {% endblock %}
 
 {% block js %}
 <script src="{{ url_for('static', filename='js/modules/home.js') }}" defer></script>
+<script src="{{ url_for('static', filename='js/modules/nav_atos.js') }}" defer></script>
 {% endblock %}
 
 {% block content %}
@@ -33,37 +35,6 @@
 {% for ato in range(1, 11) %}
 <section class="ato-section" id="ato-{{ ato }}" data-ato="{{ ato }}">
 
-  
-  <div class="ato-content">
-    <div class="ato-text">
-      <h2 class="ato-title">{{ obter_titulo_ato(ato) }}</h2>
-      <div class="ato-description">
-        {{ obter_descricao_ato(ato) | safe }}
-      </div>
-    </div>
-    
-    <div class="ato-media">
-      <!-- Mídias serão carregadas dinamicamente -->
-    </div>
-  </div>
-
-  <div class="ato-navigation">
-    {% if ato > 1 %}
-    <a href="#ato-{{ ato - 1 }}" class="nav-arrow nav-prev">‹</a>
-    {% endif %}
-    
-    <div class="ato-progress">
-      {% for i in range(1, 11) %}
-      <a href="#ato-{{ i }}" class="progress-dot {% if i == ato %}active{% endif %}"></a>
-      {% endfor %}
-    </div>
-    
-    {% if ato < 10 %}
-    <a href="#ato-{{ ato + 1 }}" class="nav-arrow nav-next">›</a>
-    {% else %}
-    <a href="#ato-0" class="nav-arrow nav-next">↻</a>
-    {% endif %}
-  </div>
 </section>
 {% endfor %}
 {% endblock %}
