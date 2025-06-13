@@ -16,7 +16,6 @@ document.addEventListener('DOMContentLoaded', function() {
         <blockquote>${config.quote}</blockquote>
       </div>
       <div class="ato-text-content">
-        <h3>${config.title}</h3>
         <p>${config.text}</p>
       </div>
       <div class="ato-video">
@@ -44,7 +43,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const nextBtn = atoContainer.querySelector('.next-btn');
     const prevBtn = atoContainer.querySelector('.prev-btn');
     
-    const views = ['title', 'quote', 'image', 'video', 'text'];
+    const views = ['title', 'quote', 'text', 'video', 'image'];
     let currentViewIndex = 0;
     
     function updateView() {
