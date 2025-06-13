@@ -15,7 +15,10 @@ document.addEventListener('DOMContentLoaded', function() {
       <div class="ato-quote">
         <blockquote>${config.quote}</blockquote>
       </div>
-      <div class="ato-image" style="background-image: url('${config.bgImage}')"></div>
+      <div class="ato-text-content">
+        <h3>${config.title}</h3>
+        <p>${config.text}</p>
+      </div>
       <div class="ato-video">
         ${config.media.type === 'video' ? 
           `<video autoplay loop muted playsinline>
@@ -23,10 +26,7 @@ document.addEventListener('DOMContentLoaded', function() {
           </video>` : 
           `<img src="${config.media.src}" alt="${config.title}">`}
       </div>
-      <div class="ato-text-content">
-        <h3>${config.title}</h3>
-        <p>${config.text}</p>
-      </div>
+      <div class="ato-image" style="background-image: url('${config.bgImage}')"></div>
       <div class="ato-nav-buttons">
         <button class="nav-btn prev-btn">←</button>
         <button class="nav-btn next-btn">→</button>
