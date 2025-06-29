@@ -4,7 +4,7 @@ from .models import (
     verificar_pacotes, verificar_pastas, setup_log, limpar_cache,
     pacotes_necessarios, pastas_necessarias, prefixo_log, nome_log
 )
-from .models.paths import path_raiz
+from .models.paths import path_raiz, path_data_entrada, path_app_static
 from .auth.auth import required_roles, secret_key
 
 __all__ = [
@@ -15,7 +15,7 @@ __all__ = [
     "verificar_pacotes", "verificar_pastas",
     'limpar_cache',
     "pacotes_necessarios", "pastas_necessarias", "prefixo_log", "nome_log",
-    'setup_log', 'path_raiz',
+    'setup_log', 'path_raiz', 'path_data_entrada', 'path_app_static',
     'required_roles',
     'secret_key'
 ]

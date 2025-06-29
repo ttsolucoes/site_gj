@@ -8,6 +8,7 @@ from .routes import acessos
 from .routes import perfil
 from .routes import gerenciar
 from .routes import eventos
+from .routes import weekly_post_routes
 from api.routes.principal import api_conexao_bp
 
 app.register_blueprint(api_conexao_bp, url_prefix='/api')
@@ -19,5 +20,6 @@ __all__ = [
     'acessos',
     'perfil',
     'gerenciar',
-    'eventos'
+    'eventos',
+    'weekly_post_routes'
 ]

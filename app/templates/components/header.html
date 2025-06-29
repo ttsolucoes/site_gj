@@ -10,6 +10,7 @@
                 {% if current_user.is_authenticated %}
                     {% if session.user.cargo == 'admin' %}
                         <li><a href="/usuarios" title="Ir para painel de usuarios">USERS</a></li>
+                        <li><a href="/manage_weekly_post">SANTO DA SEMANA</a></li>
                     {% endif %}
                     <li><a href="/eventos" title="Ir para eventos">EVENTOS</a></li>
                     <li><a href="/membros" title="Ir para membros">MEMBROS</a></li>

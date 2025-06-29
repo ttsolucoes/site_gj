@@ -1,7 +1,49 @@
-from flask import request, session, render_template
+from flask import request, session, render_template, jsonify
 from werkzeug.exceptions import HTTPException
 from app import app
-from datetime import datetime
+from datetime import datetime, date
+import requests
+
+def get_liturgia_data(dia: str = None) -> dict:
+    """
+    Retorna liturgia do dia estruturada em dicionário.
+    :param dia: data no formato 'YYYY-MM-DD' (opcional)
+    """
+    if not dia:
+        dia = date.today().strftime("%d-%m-%Y")  # Formato da API
+
+    url = f"https://liturgia.up.railway.app/v2/{dia}"
+    response = requests.get(url)
+    response.raise_for_status()
+    data = response.json()
+
+    leituras = data.get("leituras", {})
+    oracoes = data.get("oracoes", {})
+    antifonas = data.get("antifonas", {})
+
+    def extrair_texto_bloco(bloco):
+        return [l.get("texto", "") for l in bloco] if bloco else []
+
+    return {
+        "data": data.get("data"),
+        "liturgia": data.get("liturgia"),
+        "cor": data.get("cor"),
+        "oracoes": {
+            "coleta": oracoes.get("coleta"),
+            "oferendas": oracoes.get("oferendas"),
+            "comunhao": oracoes.get("comunhao"),
+        },
+        "leituras": {
+            "primeira": extrair_texto_bloco(leituras.get("primeiraLeitura")),
+            "salmo": extrair_texto_bloco(leituras.get("salmo")),
+            "segunda": extrair_texto_bloco(leituras.get("segundaLeitura")),
+            "evangelho": extrair_texto_bloco(leituras.get("evangelho")),
+        },
+        "antifonas": {
+            "entrada": antifonas.get("entrada"),
+            "comunhao": antifonas.get("comunhao"),
+        }
+    }
 
 @app.context_processor
 def inject_now():
@@ -13,7 +55,6 @@ def inject_now():
 
     return {'now': datetime.now(), 'current_user': user}
 
-from flask import render_template
 
 def obter_titulo_ato(ato_numero):
     titulos = {
@@ -68,9 +109,25 @@ def obter_descricao_ato(ato_numero):
 @app.route('/index')
 @app.route('/')
 def home():
+
+    try:
+        liturgia = get_liturgia_data()
+    except Exception as e:
+        app.logger.error(f"Erro ao obter liturgia diária: {str(e)}")
+        liturgia = None
+
     return render_template('pages/public/home.html',
                          obter_titulo_ato=obter_titulo_ato,
-                         obter_descricao_ato=obter_descricao_ato)
+                         obter_descricao_ato=obter_descricao_ato,
+                         liturgia=liturgia)
+
+@app.route('/liturgia-diaria')
+def liturgia_diaria():
+    try:
+        data = get_liturgia_data()
+        return jsonify(data)
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
 @app.errorhandler(400)
 @app.errorhandler(401)
