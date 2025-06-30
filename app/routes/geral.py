@@ -21,8 +21,8 @@ def get_liturgia_data(dia: str = None) -> dict:
     oracoes = data.get("oracoes", {})
     antifonas = data.get("antifonas", {})
 
-    def extrair_texto_bloco(bloco):
-        return [l.get("texto", "") for l in bloco] if bloco else []
+    def extrair_leitura(bloco):
+        return [{"referencia": l.get("referencia", ""), "texto": l.get("texto", "")} for l in bloco] if bloco else []
 
     return {
         "data": data.get("data"),
@@ -34,10 +34,10 @@ def get_liturgia_data(dia: str = None) -> dict:
             "comunhao": oracoes.get("comunhao"),
         },
         "leituras": {
-            "primeira": extrair_texto_bloco(leituras.get("primeiraLeitura")),
-            "salmo": extrair_texto_bloco(leituras.get("salmo")),
-            "segunda": extrair_texto_bloco(leituras.get("segundaLeitura")),
-            "evangelho": extrair_texto_bloco(leituras.get("evangelho")),
+            "primeira": extrair_leitura(leituras.get("primeiraLeitura")),
+            "salmo": extrair_leitura(leituras.get("salmo")),
+            "segunda": extrair_leitura(leituras.get("segundaLeitura")),
+            "evangelho": extrair_leitura(leituras.get("evangelho")),
         },
         "antifonas": {
             "entrada": antifonas.get("entrada"),
