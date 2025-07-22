@@ -1,0 +1,146 @@
+:root {
+    /* Cores principais solicitadas */
+    --text-color: #1A0D42;        /* Cor de texto principal */
+    --background-color: #FFFFFF; /* Fundo da página */
+    --border-color: #000000;     /* Linhas e bordas */
+
+    /* Cores auxiliares (manter ou adaptar conforme necessidade do cliente) */
+    --primary-color: #1A0D42;
+    --secondary-color: #34D399;
+    --accent-color: #F59E0B;
+    --danger-color: #EF4444;
+    --success-color: #10B981;
+    --info-color: #60A5FA;
+    --warning-color: #FBBF24;
+
+    /* Cores de texto secundárias */
+    --text-dark: #000000;
+    --text-light: #5E5E5E;
+
+    /* Cores de fundo e cartões */
+    --background-soft: #F7F7F7;
+    --background-card: #FFFFFF;
+
+    /* Botões */
+    --btn-primary-bg: var(--primary-color);
+    --btn-primary-text: #ffffff;
+    --btn-secondary-bg: var(--secondary-color);
+    --btn-secondary-text: #ffffff;
+
+    /* Modal */
+    --modal-bg: rgba(0, 0, 0, 0.6);
+    --modal-content-bg: #fff;
+    --shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+    --radius: 12px;
+    --transition-fast: 0.2s ease;
+
+  /* Cores temáticas para cada ato */
+  --ato-0-color: #1A0D42;    /* Entrada - Roxo escuro */
+  --ato-1-color: #2E7D32;    /* Criação - Verde */
+  --ato-2-color: #C62828;    /* Queda - Vermelho */
+  --ato-3-color: #F9A825;    /* Reconciliação - Amarelo */
+  --ato-4-color: #1565C0;    /* Maria - Azul */
+  --ato-5-color: #6A1B9A;    /* Espírito - Roxo */
+  --ato-6-color: #00838F;    /* Guadalupe - Azul esverdeado */
+  --ato-7-color: #EF6C00;    /* GJ - Laranja */
+  --ato-8-color: #AD1457;    /* Convite - Rosa escuro */
+  --ato-9-color: #37474F;    /* Graça - Cinza azulado */
+  --ato-10-color: #FFFFFF;   /* Céu - Branco */
+  
+  /* Transições */
+  --transition-fast: 0.2s ease;
+  --transition-medium: 0.4s ease;
+  --transition-slow: 0.7s ease;
+
+    /* Espaçamento */
+    --spacing-unit: 1rem;
+}
+
+/* Reset básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+a {
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+body {
+    font-family: 'Fredoka', sans-serif; /* Exemplo: Fredoka como mais fácil */
+    font-weight: bold;
+    line-height: 1.6;
+    color: var(--text-color);
+    background-color: var(--background-color);
+}
+
+label {
+    font-weight: bold;
+    color: var(--text-dark);
+}
+
+.main-content {
+    min-height: 80vh;
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    background-color: var(--background-card);
+    border: 1px solid var(--border-color);
+    border-radius: 1rem;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+/* Utilitários */
+.text-center { text-align: center; }
+.mt-1 { margin-top: 0.5rem; }
+.mt-2 { margin-top: 1rem; }
+.mb-2 { margin-bottom: 1rem; }
+
+.hidden {
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Estilos para botões */
+.btn {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    border-radius: 0.25rem;
+    font-weight: bold;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin: 0.25rem;
+}
+
+.btn-primary {
+    background-color: var(--btn-primary-bg);
+    color: var(--btn-primary-text);
+    border: 2px solid var(--btn-primary-bg);
+}
+
+.btn-secondary {
+    background-color: transparent;
+    color: var(--primary-color);
+    border: 2px solid var(--primary-color);
+}
+
+.btn-outline {
+    background-color: transparent;
+    color: var(--primary-color);
+    border: 2px solid var(--primary-color);
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
