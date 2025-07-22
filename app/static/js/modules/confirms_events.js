@@ -27,6 +27,7 @@ function abrirModal(botao) {
     });
 
     modal.classList.add('show');
+    modal.classList.remove('hidden');
 }
 
 
